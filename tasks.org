@@ -1,4 +1,3 @@
-#+STARTUP: overview
 +STARTUP: num
 #+SETUPFILE: ~/org-html-themes/org/theme-bigblow.setup
 * This is the first title 
