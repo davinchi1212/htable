@@ -1,0 +1,67 @@
+#+TITLE: Htable in C language with Linear probing (open addressing)
+#+author: davinchi1212
+
+
+* Linera Probing in Htable
+In _Open Addressing_ , all elements are stored in the hash table itself.
+So at any point, size of the table must be greater than or equal to total
+number of keys (Note that we can increase table size by copying old data
+if needed).
+** Insert(k) -
+Keeping probing until an empty slot is found.
+Once an empty slot is found, insert k.
+** Search(k) -
+Keep probing until slot's key doesn't become equal to k or an empty
+slot is reached.
+** Delete(k) -
+Delete operation in inserting. If we simply delete a key, then search my
+fail. So slots of deleted keys are marked specially as "deleted".
+** Load factor -
+#+BEGIN_SRC code
+  load_factor = number_of_elements / table_capacity 
+  load_factor = (table_size * 100 ) / table_capacity 
+#+END_SRC
+we multiply by 100 to express the load_factor as percentage instead
+of floating point fraction.
+*** 70 means 70%.
+*** Once the table reaches 70% usage, don't allow new insertion.
+**** Why limit it to 70% ?
+Because :
+***** Open addressing(like linear probing) has worse performance when the table gets too full.
+***** Collision resolution gets *slower* as more slots as occupied.
+***** A load factor of 0.5-0.75 is typical balance between memory usage and performance .
+**** Better alternatives :
+In real world hastable, you *resize* and *rehash* when it's too full instead of returning an error.
+Example logic:
+#+BEGIN_SRC code c 
+  if (((table->size * 100) / table->capacity ) >= 70 )  {
+     resize_and_rehash(table) ; 
+  }
+#+END_SRC 
+
+
+
+* Htable step by step
+** Define the hatable macro
+#+BEGIN_SRC gcc
+  #define DEFINE_HTABLE(KT , KV , NAME) \
+
+  typedef struct NAME##_entry {  \
+       KT key ;                  \
+       KV value ;                \
+       int in_use ; // flag      \
+  }NAME##_entry;                 \
+
+  typedef struct NAME {         \
+       size_t count ;              \
+       size_t capacity ;           \
+       NAME##_entry* entries ;  \
+  }NAME ;                       \
+#+END_SRC 
+** Define htable use funcions
+- htable_init(Table* table) ;
+- htable_free(Table* table) ; 
+- htable_insert(Table* table, KT key , KV value) ;
+- htable_get(Table* table, KT key) ;
+- htable_remove(Table* table, KV value) ; 
+  
