@@ -1,0 +1,129 @@
+#+STARTUP: overview
++STARTUP: num
+#+SETUPFILE: ~/org-html-themes/org/theme-bigblow.setup
+* This is the first title 
+* Structure Editing
+
+** org-meta-return
+** org-insert-heading-respect-heading
+** org-insert-todo-heading
+** TODO org-insert-todo-heading-respect-content
+    ** TODO 
+    ** TODO org-sort : Sort same-level entries. When here
+    is an active region, all entries on the region the current
+    headline are stored. The commad prompts for the s orting
+    method, time-first timestamp with active preferred, creation
+    time, scheduled time,
+    the sequence thekeywords have been defined in the
+    setup-or by the vaue of
+    well. You can also supply your own function to extract
+    the sorting key.
+
+
+    * DONE Sparce Trees
+** C-c / (org-parse-tree)
+This prompts for an extra key to select a sparse-tree creating
+command.
+** TODO M-g or M- M-n (next-error)
+Jmup to the next sparse tree match in this buffer.
+** TODO M-g p or M-g M-n (next-error)
+Jump to the previous sparse tree match in this buffer
+
+* DONE Plain Lists
+** TODO
+:sabra:
+within a nentry of the outline tree, hand-formatted lists can
+create lists of checkboxes (see Checkboxes) .
+Org supports editing and formatting them.
+Org knows ordered lists, unordered lists, and description list
+:END:
+*** Unordered list items tstart with '-' '+' , or '*'
+*** TODO Ordered list items start with a numeral followed by eather
+you want a list to start with a different value-e...
+*** TODO Description :
+list itemst are unordered list items, and containing the description.
+
+* DONE Lord of the Rings:
+My favorite scenes ar (in this order)
+1. The attack o fthe Rohirrim
+2. Eqwyn's fight with the witch king
+   + this was already my favorite scene in the book
+   + I really like Miranda Otto.
+3. Peter Jackson being shot by Legolas
+   - on DVD only
+   He makes a really funny face when it happens.
+8. [@8] <favorite scenes 4 to 8 ar skipped for brevity>
+But in the end, no individual scenes matter but the fils is as important
+Improtant actors in this film are:
+- Elijah Wood :: He plays Frodo.
+- Sean Astin :: He plays Sam, Frodo's friend. I still remember
+  very well from his role as Mikey Walsh in /The Goonies/
+   
+* CheckBoxes  [2/4]
+- [-] call people [66%]
+  - [X] Peter
+  - [ ] Sarah
+  - [X] Sam
+- [X] order food
+- [ ] think about what music to play
+- [X] talk to the neighbors
+
+
+* CheckBoxes
+
+1. [ ] not checkh '[ ]'
+2. [ ] partially checked '[-]'
+3. [ ] checked '[X]'
+** C-c C-c (org-toggle-checkbox)
+Toggle checkbox status or-with prefix argument-ceckbox
+presence at point. With a single prefix argument, add an empty
+checkbox or remove the current one. With a bouble prefix argument,
+set it to '[-]', which is considered to be an intermediate state.
+** C-c C-x C-b (org-toggle-checkbox)
+Toggle checkbox status or-with prefix argument-checkbox presence at point.
+With double prefix argument, set it to '[-]',
+which is considered to be an intermediate state.
+1. If there is an active region, toggle the first checkbox in
+   the region and set all remaining boxes to the same status
+   as the first. Wtih a prefix argument, add or remove the checkbox
+   for all items in the region.
+2. If point is in a headline toggle checkboxes in the region between
+   this headline and the next-so not the entire subtree
+3. If there is no active region, just toggle the checkbox at point.kkkkkk
+
+* Creating Timestamps
+** TODO C-c . (org-timestamp)
+Prompt for a date and insert a corresponding timestamp. When point is
+at an existing timestamp in the buffer, the command is used to modify
+this timestamp instead of inserting a new one.
+When this command is used t whice in succession, a time range
+is inserted.
+When called with a prefix argument, use the alternative format which
+contains date and time. The default can be rounded to multiples
+of 5 minutes. See the option org-timestamp-rounding-minutes.
+With two prefix arguments, insert an active timestamp with the current
+time without prompting.<2025-07-01 Tue>
+** TODO C-c ! (org-timestamp-inactive)
+Like C-c . , but insert an inactive timestamp that does
+not cause an ageneda entry. [2025-07-01 Tue]
+** TODO C-c C-c
+Normalize timestamp, insert or fix day name if missing or wrong<2025-07-01 Tue>.
+<2025-07-01 Tue>
+** TODO C-c > (org-goto-calendar)
+Access the Emacs calendar for the current date. If there is
+timestamp in the current line, go to the corresponding date
+instead<2025-07-01 Tue>
+** TODO C-c < (org-date-from-calendar)
+Insert a timestamp cerresponding to point date in the calendar.
+** TODO C-c C-o (org-open-at-point)
+Access the agenda for the date given by the timestamp or
+range at point [2025-07-01 Tue]
+** TODO this is a scheduling
+*** C-c C-d (org-deadline)
+Insert 'DEADLINE' keyword along with a stamp
+DEADLINE: <2025-07-01 Tue>
+*** C-c C-s (org-schedule)
+Insert 'SCHEDULED' keyword along with a stamp.
+SCHEDULED: <2025-07-01 Tue>
+
+
