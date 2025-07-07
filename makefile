@@ -1,5 +1,5 @@
-run : main.c
-	gcc -g main.c htable.c -o run
+run : test.c
+	gcc -g test.c htable.c -o test
 
 clean:
 	rm run
