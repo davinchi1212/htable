@@ -38,9 +38,6 @@ Example logic:
      resize_and_rehash(table) ; 
   }
 #+END_SRC 
-
-
-
 * Htable step by step
 ** Define the hatable macro
 #+BEGIN_SRC gcc
@@ -51,17 +48,19 @@ Example logic:
        KV value ;                \
        int in_use ; // flag      \
   }NAME##_entry;                 \
-
+\
   typedef struct NAME {         \
        size_t count ;              \
        size_t capacity ;           \
        NAME##_entry* entries ;  \
   }NAME ;                       \
 #+END_SRC 
-** Define htable use funcions
+** Define htable'use funcions
 - htable_init(Table* table) ;
 - htable_free(Table* table) ; 
 - htable_insert(Table* table, KT key , KV value) ;
 - htable_get(Table* table, KT key) ;
-- htable_remove(Table* table, KV value) ; 
+- htable_remove(Table* table, KV value) ;
+- htable_resize(Table* old , Table* new) ; 
+  
   
