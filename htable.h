@@ -1,7 +1,5 @@
 #ifndef HTABLE_H_
 #define HTABLE_H_
-#include <stdint.h> 
-#include <stdlib.h> 
 
 
 
@@ -70,24 +68,36 @@
        table = copy_table(table) ;					\
 									\
 									\
-    uint64_t idx = ht_hash(key) & (table->capacity - 1);                       \
-    while (table->entries[idx].in_use) {                                       \
-      if (memcmp(&table->entries[idx].key, &key, sizeof(KT)) == 0) {           \
-        table->entries[idx].value = value;                                     \
-        return 1;                                                              \
-      }                                                                        \
-      idx = (idx + 1) & (table->capacity - 1);                                 \
-    }                                                                          \
-    table->entries[idx].key = key;                                             \
-    table->entries[idx].value = value;                                         \
-    table->entries[idx].in_use = 1;                                            \
-    table->size++;                                                             \
-    return 1;                                                                  \
-  }                                                                            \
-                                                                               \
-                                                                               \
-  static inline int ht_remove(NAME *table, KT key)			\
-  {									\
+     uint64_t idx = ht_hash(key) & (table->capacity - 1);		\
+    while (table->entries[idx].in_use) {				\
+      if (memcmp(&table->entries[idx].key, &key, sizeof(KT)) == 0) {	\
+        table->entries[idx].value = value;				\
+        return 1;							\
+      }									\
+      idx = (idx + 1) & (table->capacity - 1);				\
+    }									\
+    table->entries[idx].key = key;					\
+    table->entries[idx].value = value;					\
+    table->entries[idx].in_use = 1;					\
+    table->size++;							\
+    return 1;								\
+   }									\
+									\
+   static inline KV* ht_get(NAME* table, KT key )			\
+   {									\
+     if (table->size == 0) return NULL ;				\
+     uint64_t idx = ht_hash(key) & (table->capacity - 1 ) ;		\
+     while(table->entries[idx].in_use )					\
+     {								        \
+       if (memcmp(&table->entries[idx].key, &key , sizeof(KT)) == 0 )	\
+	   return &table->entries[idx].value ;				\
+       idx = (idx + 1) & (table->capacity -1 ) ;			\
+     }									\
+     return NULL ;							\
+   }									\
+									\
+   static inline int ht_remove(NAME *table, KT key)			\
+   {									\
     if (table->size == 0 ) return  0 ;					\
     uint64_t idx  = ht_hash(key) & (table->capacity - 1) ;		\
     int i = 0 ;								\
